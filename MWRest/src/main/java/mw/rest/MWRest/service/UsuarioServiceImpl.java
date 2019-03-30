@@ -37,12 +37,17 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Optional<Usuario> buscar(Long id) {
-        return usuarioRepository.findById(id);
+    public Usuario buscar(Long id) {
+        return usuarioRepository.findUsuarioById(id);
     }
 
     @Override
     public List<Usuario> buscarTodos() {
         return (List<Usuario>) usuarioRepository.findAll();
+    }
+
+    @Override
+    public Usuario inserirUsuario(Usuario usuario) {
+        return usuarioRepository.save(usuario);
     }
 }
