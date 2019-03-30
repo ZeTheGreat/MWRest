@@ -3,6 +3,7 @@ package mw.rest.MWRest.service.api;
 import mw.rest.MWRest.model.Postagem;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PostagemService {
 
@@ -12,7 +13,7 @@ public interface PostagemService {
 
     public List<Postagem> BuscarTodos();
 
-    public List<Postagem> buscarPostagem(String nome);
+    public List<Postagem> buscarPostagem(String titulo);
 
-    public Postagem buscarPorId(Long idPostagem);
+    public Optional<Postagem> buscarPorId(Long idPostagem);
 }
