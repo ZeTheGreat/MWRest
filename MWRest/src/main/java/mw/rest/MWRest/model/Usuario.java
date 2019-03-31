@@ -38,7 +38,7 @@ public class Usuario {
     @Setter
     private String email;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "POSTAGEM_USUARIO",
             joinColumns = {@JoinColumn(name = "USR_ID")},
             inverseJoinColumns = {@JoinColumn(name = "POST_ID")})
@@ -51,5 +51,8 @@ public class Usuario {
         this.usuario = usuario;
         this.senha = senha;
         this.email = email;
+    }
+
+    public Usuario() {
     }
 }

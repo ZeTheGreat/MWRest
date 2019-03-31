@@ -25,9 +25,9 @@ public class Postagem {
     @Getter @Setter
     private String conteudo;
 
-    @ManyToMany(mappedBy = "postagens", cascade = CascadeType.ALL)
-    @Getter @Setter
-    private List<Usuario> usuarios = new ArrayList<>();
+    //@ManyToMany(mappedBy = "postagens", cascade = CascadeType.ALL)
+    //@Getter @Setter
+    //private List<Usuario> usuarios = new ArrayList<>();
 
 
 

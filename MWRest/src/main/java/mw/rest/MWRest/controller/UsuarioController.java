@@ -16,19 +16,23 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/usuario")
+@RequestMapping(value = "/usuarios")
 public class UsuarioController {
 
     @Autowired
-    @Setter
     private UsuarioService usuarioService;
 
-    @GetMapping(value = "/get/{nome}")
+    @RequestMapping(value = "/")
+    public String hello() {
+        return "Olá";
+    }
+
+    @GetMapping(value = "/nome/{nome}")
     public ResponseEntity<Collection<Usuario>> buscarUsuarioPorNome(@PathVariable("nome") String nome){
         return new ResponseEntity<Collection<Usuario>>(usuarioService.buscar(nome), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/get/{id}")
+    @GetMapping(value = "/id/{id}")
     public ResponseEntity<Usuario> buscarUsuarioPorId(@PathVariable("id") Long id){
         Usuario usuario = usuarioService.buscar(id);
         if(usuario == null){
@@ -39,7 +43,7 @@ public class UsuarioController {
 
     }
 
-    @GetMapping(value = "/get/todos")
+    @GetMapping(value = "/todos")
     public ResponseEntity<Collection<Usuario>> buscarTodosUsuarios(){
         List<Usuario> usuarios = usuarioService.buscarTodos();
 
@@ -53,7 +57,7 @@ public class UsuarioController {
     @PostMapping(value = "/salvar")
     public ResponseEntity<Usuario> save(@RequestBody Usuario usuario, HttpServletRequest request, HttpServletResponse response) {
         usuario = usuarioService.inserirUsuario(usuario);
-        response.addHeader("Location", request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/usuario/getById?id=" + usuario.getId());
+        //response.addHeader("Location", request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/usuario/get?id=" + usuario.getId());
         return new ResponseEntity<Usuario>(usuario, HttpStatus.CREATED);
     }
 }
