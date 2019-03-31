@@ -1,9 +1,11 @@
 package mw.rest.MWRest.controller;
 
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Setter;
 import mw.rest.MWRest.model.Usuario;
 import mw.rest.MWRest.service.api.UsuarioService;
+import mw.rest.MWRest.view.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,11 +30,13 @@ public class UsuarioController {
     }
 
     @GetMapping(value = "/nome/{nome}")
+    @JsonView({View.UsuarioUtil.class})
     public ResponseEntity<Collection<Usuario>> buscarUsuarioPorNome(@PathVariable("nome") String nome){
         return new ResponseEntity<Collection<Usuario>>(usuarioService.buscar(nome), HttpStatus.OK);
     }
 
     @GetMapping(value = "/id/{id}")
+    @JsonView({View.UsuarioApenas.class})
     public ResponseEntity<Usuario> buscarUsuarioPorId(@PathVariable("id") Long id){
         Usuario usuario = usuarioService.buscar(id);
         if(usuario == null){
@@ -43,6 +47,7 @@ public class UsuarioController {
 
     }
 
+    @JsonView({View.UsuarioInteiro.class})
     @GetMapping(value = "/todos")
     public ResponseEntity<Collection<Usuario>> buscarTodosUsuarios(){
         List<Usuario> usuarios = usuarioService.buscarTodos();
