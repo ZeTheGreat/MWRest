@@ -45,7 +45,7 @@ public class Usuario {
     @JsonView({View.UsuarioApenas.class, View.UsuarioInteiro.class,View.UsuarioUtil.class})
     private String email;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "POSTAGEM_USUARIO",
             joinColumns = {@JoinColumn(name = "USR_ID")},
             inverseJoinColumns = {@JoinColumn(name = "POST_ID")})
@@ -55,6 +55,14 @@ public class Usuario {
     private List<Postagem> postagens;
 
     public Usuario(String nome, String usuario, String senha, String email) {
+        this.nome = nome;
+        this.usuario = usuario;
+        this.senha = senha;
+        this.email = email;
+    }
+
+    public Usuario(Long id, String nome, String usuario, String senha, String email) {
+        this.id = id;
         this.nome = nome;
         this.usuario = usuario;
         this.senha = senha;
